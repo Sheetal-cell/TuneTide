@@ -169,5 +169,14 @@ function showPlayer() {
     playerContainer.style.display = "block";
     playerContainer.classList.add("playing");
 }
+document.getElementById("searchMood").addEventListener("input", function() {
+    let filter = this.value.toLowerCase();
+    let options = document.getElementById("mood").options;
+
+    for (let option of options) {
+        let text = option.text.toLowerCase();
+        option.style.display = text.includes(filter) ? "" : "none";
+    }
+});
 
 
