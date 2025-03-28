@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>TuneTide–Feel it. Flow with it.🌊🎶</title>
+    <link rel="icon" href="assets/TuneTide logo.jpg" type="image/x-icon">
+    <link rel="icon" href="assets/TuneTide logo.jpg" type="image/png">
+    
+</head>
+<body>
+    <h1>TuneTide 🎶 - Feel it. Flow with it.</h1>
+    <label for="mood">Choose Your Mood:</label>
+    <select id="mood">
+        <option value="happy">Happy 😊</option>
+        <option value="sad">Sad 😔</option>
+        <option value="chill">Chill 🌿</option>
+        <option value="energetic">Energetic 🔥</option>
+    </select>
+    <button onclick="playMusic()">Play Music</button>
+    
+    <div class="player">
+        <audio id="audioPlayer" controls>
+            <source id="audioSource" src="" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

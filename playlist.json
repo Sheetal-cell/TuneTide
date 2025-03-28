@@ -1,0 +1,7 @@
+{
+    "Happy": ["happy1.mp3", "happy2.mp3", "happy3.mp3"],
+    "Sad": ["sad1.mp3", "sad2.mp3", "sad3.mp3"],
+    "Chill": ["chill1.mp3", "chill2.mp3", "chill3.mp3"],
+    "Energetic": ["energetic1.mp3", "energetic2.mp3", "energetic3.mp3"]
+  }
+  
