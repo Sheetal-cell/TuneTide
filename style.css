@@ -496,8 +496,27 @@ audio {
     background: radial-gradient(circle, #ff8c00, #e65100);
     animation: vintageBlink 3s infinite alternate;
 }
+.wedding-bg {
+    background: radial-gradient(circle, #ffcccb, #ffb6c1);
+    animation: heartGlow 6s infinite ease-in-out;
+}
+
+.friendship-bg {
+    background: radial-gradient(circle, #32cd32, #7fff00);
+    animation: sparkles 6s infinite ease-in-out;
+}
 
 /* 🎉 Animations */
+@keyframes heartGlow {
+    0% { box-shadow: 0px 0px 10px pink; }
+    50% { box-shadow: 0px 0px 30px hotpink; }
+    100% { box-shadow: 0px 0px 10px pink; }
+}
+
+@keyframes sparkles {
+    0%, 100% { background-size: 100% 100%; }
+    50% { background-size: 110% 110%; }
+}
 
 
 @keyframes confetti {
@@ -581,4 +600,42 @@ audio {
 @keyframes vintageBlink {
     0% { opacity: 1; }
     100% { opacity: 0.5; }
+}
+
+
+.dropdown-container {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+}
+
+#searchMood {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#mood {
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px;
+    background-color: #fff;
+}
+
+/* For small screens */
+@media (max-width: 600px) {
+    .dropdown-container {
+        max-width: 100%;
+    }
+
+    #mood {
+        font-size: 14px;
+    }
 }

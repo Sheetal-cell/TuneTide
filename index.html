@@ -14,31 +14,36 @@
     <h2>Feel it,Flow with it</h2>
 
     <label for="mood">Choose Your Mood:</label>
-    <select id="mood" onchange="loadSongs()">
-        <option value="">-- Select Mood --</option>
-        <option value="happy">😊 Happy</option>
-        <option value="sad">😢 Sad</option>
-        <option value="chill">🌊 Chill</option>
-        <option value="energetic">⚡ Energetic</option>
-        <option value="festive">🎉 Festive</option>
-        <option value="romantic">💖 Romantic</option>
-        <option value="long_drive">🚗 Long Drive</option>
-        <option value="devotional">🙏 Devotional</option>
-        <option value="patriotic">🇮🇳 Patriotic</option>
-        <option value="study">📚 Study</option>
-        <option value="celebration">🎊 Celebration</option>
-        <option value="hope">🌟 Hope</option>
-        <option value="motivation">🔥 Motivation</option>
-        <option value="classical">🎻 Classical</option>
-        <option value="hip_hop">🎤 Hip-Hop</option>
-        <option value="bollywood_dance">💃 Bollywood Dance</option>
-        <option value="party">🎈 Party</option>
-        <option value="winning">🏆 Winning</option>
-        <option value="ghazals">🎼 Ghazals</option>
-        <option value="retro">📻 Retro</option>
-        <option value="travel">✈️ Travel</option>
-        <option value="90s">🎶 90s Hits</option>
-    </select>
+    <div class="dropdown-container">
+        <input type="text" id="searchMood" placeholder="Search Mood 🎵">
+        <select id="mood" size="5" onchange="loadSongs()">
+            <option value="happy">😊 Happy</option>
+            <option value="sad">😢 Sad</option>
+            <option value="chill">🌿 Chill</option>
+            <option value="friendship">🤝 Friendship</option>
+            <option value="energetic">⚡ Energetic</option>
+            <option value="festive">🎉 Festive</option>
+            <option value="romantic">💖 Romantic</option>
+            <option value="wedding">💍 Wedding</option>
+            <option value="longdrive">🚗 Long Drive</option>
+            <option value="devotional">🙏 Devotional</option>
+            <option value="patriotic">🇮🇳 Patriotic</option>
+            <option value="study">📖 Study</option>
+            <option value="celebration">🎊 Celebration</option>
+            <option value="hope">🌅 Hope</option>
+            <option value="motivation">🔥 Motivation</option>
+            <option value="classical">🎻 Classical</option>
+            <option value="hiphop">🎤 Hip-Hop</option>
+            <option value="bollywooddance">💃 Bollywood Dance</option>
+            <option value="party">🥳 Party</option>
+            <option value="winning">🏆 Winning</option>
+            <option value="ghazals">🎼 Ghazals</option>
+            <option value="retro">📻 Retro</option>
+            <option value="travel">✈️ Travel</option>
+            <option value="nineties">📼 90s</option>
+        </select>
+    </div>
+    
 
     <label for="songs">Select a Song:</label>
     <select id="songs"></select>
