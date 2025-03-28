@@ -1,45 +1,261 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background: linear-gradient(to right, #4facfe, #00f2fe);
+    
     color: white;
     padding: 20px;
+    animation: gradientShift 5s infinite alternate;
+    transition: background 1.5s ease-in-out;
+    
+    background: linear-gradient(to right, #63ffe5, #22f4ff);
+    background-size: 200% 200%;
+    animation: gradientShift 5s infinite alternate;
+    
 }
-h1 {
-    font-size: 2.5em;
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
-select, button {
-    padding: 10px;
-    font-size: 1.2em;
-    margin: 10px;
-    border-radius: 5px;
-    border: none;
-}
-.player {
-    margin-top: 20px;
+/* Logo Styling */
+.logo {
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    width: 600px;
+    height: auto;
+    animation: logoBounce 2s infinite alternate ease-in-out;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Logo Animation */
+@keyframes logoBounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+}
+
+/* Mood-Based Backgrounds */
+.happy-bg {
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    animation: gradientShift 6s infinite alternate;
+}
+
+.sad-bg {
+    background: linear-gradient(45deg, #667db6, #0082c8);
+    animation: gradientShift 6s infinite alternate;
+}
+
+.chill-bg {
+    background: linear-gradient(45deg, #89f7fe, #66a6ff);
+    animation: gradientShift 6s infinite alternate;
+}
+
+.energetic-bg {
+    background: linear-gradient(45deg, #f12711, #f5af19);
+    animation: gradientShift 6s infinite alternate;
+}
+/* Title Animations */
+h1 {
+    font-size: 2.8em;
+    margin-bottom: 0;
+    animation: float 3s infinite ease-in-out;
+    color: #6e676a;
+   
+}
+h2 {
+    font-size: 1.8em;
+    font-weight: 300;
+    margin-bottom: 10px;
+    margin-top: 0;
+    animation: float 3s infinite ease-in-out;
+    color: #7b7a7b;
+}
+p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+
+/* Select & Button Styling */
+select, button {
+    padding: 12px;
+    font-size: 1.2em;
+    margin: 5px auto;
+    border-radius: 8px;
+    border: none;
+    transition: transform 0.2s ease-in-out;
+    display: block;
+}
+
+button {
+    background: #827b7e;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 4px 15px rgba(255, 126, 179, 0.5);
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 5px 20px rgba(255, 126, 179, 0.8);
+}
+
+/* Music Player Animations */
+.player {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    transition: opacity 0.5s ease-in-out;
+    position: relative;
+    left: 34%;
+    transform: translateX(-50%);
+}
+
+
+
+audio {
+    width: 60%;
+    border-radius: 10px;
+}
+
+/* Playing Animation */
+.playing {
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* 💻 Large Screens (Desktops & Laptops) */
+@media (min-width: 1200px) {
+    .player {
+        width: 60%;
+        max-width: 500px;
+    }
     h1 {
-        font-size: 2em;
+        font-size: 3em;
+    }
+    select, button {
+        font-size: 1.3em;
+        padding: 12px;
+    }
+    .logo {
+        width: 180px;
+        height: auto;
+    }
+}
+
+/* 📱 Medium Screens (Tablets & Small Laptops) */
+@media (max-width: 992px) {
+    .player {
+        width: 75%;
+        max-width: 380px;
+    }
+    select, button {
+        font-size: 1.1em;
+        padding: 10px;
+    }
+}
+
+/* 📱 Smaller Screens (Tablets & Phablets) */
+@media (max-width: 768px) {
+    .player {
+        width: 90%;
+        max-width: 350px;
     }
     select, button {
         font-size: 1em;
         padding: 8px;
     }
+    h1 {
+        font-size: 2.2em;
+    }
+    .logo {
+        width: 45px;
+        height: 45px;
+        top: 5px;
+        left: 5px;
+    }
 }
 
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.8em;
+/* 📱 Small Screens (Mobiles) */
+@media (max-width: 600px) {
+    .player {
+        width: 95%;
+        max-width: 320px;
+        position: static; /* Ensures it stays below Play Music */
+        margin: 15px auto; /* Centers it */
+        transform: none; /* Removes unwanted shift */
+        
     }
     select, button {
         font-size: 0.9em;
         padding: 6px;
     }
-    .player {
-        width: 90%;
-        margin: auto;
+    h1 {
+        font-size: 2em;
     }
+}
+
+/* 📱 Extra Small Screens (Very Small Mobiles) */
+@media (max-width: 400px) {
+    .player {
+        width: 100%;
+        max-width: 300px;
+    }
+    select, button {
+        font-size: 0.85em;
+        padding: 5px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    
 }
