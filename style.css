@@ -405,17 +405,31 @@ audio {
 }
 .festive-bg {
     background: radial-gradient(circle, #ffcc00, #ff6600);
-    animation: confetti 10s infinite ease-in-out;
+    animation: confetti 25s infinite ease-in-out alternate-reverse;
 }
 
 .romantic-bg {
     background: radial-gradient(circle, #ff758c, #ff7eb3);
-    animation: hearts 6s infinite ease-in-out;
+    animation: hearts 10s infinite ease-in-out;
+    position: relative;
+    overflow:auto;
 }
 
 .longdrive-bg {
     background: radial-gradient(circle, #1e3c72, #2a5298);
     animation: movingRoad 5s infinite linear;
+   
+}
+@keyframes movingRoad {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
 }
 
 .devotional-bg {
@@ -473,13 +487,16 @@ audio {
 }
 
 .winning-bg {
-    background: radial-gradient(circle, #ffd700, #ff8c00);
-    animation: trophyShine 5s infinite;
+    background: radial-gradient(circle, #79fad3, #00c38f);
+    animation: trophyShine 3s infinite;
 }
 
 .ghazals-bg {
     background: radial-gradient(circle, #5e4c5a, #847996);
-    animation: smoothFlow 6s infinite;
+    animation: smoothFlow 10s infinite;
+    h1,h2{
+        color: black;
+    }
 }
 
 .retro-bg {
@@ -489,7 +506,7 @@ audio {
 
 .travel-bg {
     background: radial-gradient(circle, #3976a8, #0072ff);
-    animation: floatingClouds 12s infinite linear;
+    animation: floatingClouds 4s infinite reverse;
 }
 
 .nineties-bg {
@@ -507,6 +524,22 @@ audio {
 }
 
 /* 🎉 Animations */
+@keyframes hearts {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-100px) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-200px) scale(1.5);
+    }
+}
+
+
 @keyframes heartGlow {
     0% { box-shadow: 0px 0px 10px pink; }
     50% { box-shadow: 0px 0px 30px hotpink; }
@@ -520,14 +553,20 @@ audio {
 
 
 @keyframes confetti {
-    0%, 100% { background-size: 100% 100%; }
-    50% { background-size: 110% 110%; }
+    0% {
+        opacity: 0;
+        transform: translateY(-10px) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(50px) rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100px) rotate(360deg);
+    }
 }
 
-@keyframes movingRoad {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 100px; }
-}
 
 @keyframes divineGlow {
     0% { box-shadow: 0px 0px 20px rgb(254, 113, 25); }
@@ -579,7 +618,7 @@ audio {
 
 @keyframes trophyShine {
     0% { filter: brightness(1); }
-    100% { filter: brightness(1.5); }
+    100% { filter: brightness(5); }
 }
 
 @keyframes smoothFlow {
@@ -593,14 +632,82 @@ audio {
 }
 
 @keyframes floatingClouds {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 100px; }
+    0% {
+        background-position: 0 0;
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        background-position: 100% 50%;
+        opacity: 0.5;
+        transform: scale(1.05);
+    }
+    100% {
+        background-position: 200% 100%;
+        opacity: 0.7;
+        transform: scale(1);
+    }
 }
 
+
 @keyframes vintageBlink {
-    0% { opacity: 1; }
-    100% { opacity: 0.5; }
+    0% {
+        opacity: 0.8;
+        transform: translateX(-5px);
+    }
+    25% {
+        opacity: 1;
+        transform: translateX(5px);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateX(-5px);
+    }
+    75% {
+        opacity: 1;
+        transform: translateX(5px);
+    }
+    100% {
+        opacity: 0.8;
+        transform: translateX(0);
+    }
 }
+
+/* Self Love Mood */
+.self-love-bg {
+    background: radial-gradient(circle, #ff7eb3, #ff65a3); /* Soft pink tones */
+    animation: glowingHeart 6s infinite alternate ease-in-out;
+}
+
+/* Keyframes for Self Love Animation */
+@keyframes glowingHeart {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 30px rgba(255, 105, 180, 1);
+    }
+}
+.relaxation-bg {
+    background: radial-gradient(circle, #d6a2e8, #6e7dff);
+    animation: smoothRelaxation 8s infinite ease-in-out;
+}
+
+@keyframes smoothRelaxation {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
 
 
 .dropdown-container {

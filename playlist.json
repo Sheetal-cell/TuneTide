@@ -2,6 +2,8 @@
     "happy": ["happy1.mp3", "happy2.mp3", "happy3.mp3"],
     "sad": ["sad1.mp3", "sad2.mp3", "sad3.mp3"],
     "chill": ["chill1.mp3", "chill2.mp3", "chill3.mp3"],
+    "self-love":["self-love1","self-love2"],
+    "relaxation":["relaxation1","relaxation2","relaxation","relaxation4"],
     "friendship":["friendship1","friendship2"],
     "energetic": ["energetic1.mp3", "energetic2.mp3", "energetic3.mp3"],
     "festive": ["song9.mp3", "song10.mp3"],
