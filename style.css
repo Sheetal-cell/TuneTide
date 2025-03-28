@@ -10,13 +10,10 @@ body {
     
     background: linear-gradient(to right, #63ffe5, #22f4ff);
     background-size: 200% 200%;
-    animation: gradientShift 5s infinite alternate;
+    
     
 }
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
-}
+
 /* Logo Styling */
 .logo {
     position: absolute;
@@ -33,26 +30,173 @@ body {
     100% { transform: translateY(-5px); }
 }
 
-/* Mood-Based Backgrounds */
 .happy-bg {
-    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-    animation: gradientShift 6s infinite alternate;
+    background: radial-gradient(circle, #ff9a9e, #fad0c4);
 }
 
 .sad-bg {
-    background: linear-gradient(45deg, #667db6, #0082c8);
-    animation: gradientShift 6s infinite alternate;
+    background: radial-gradient(circle, #667db6, #0082c8);
 }
 
 .chill-bg {
-    background: linear-gradient(45deg, #89f7fe, #66a6ff);
-    animation: gradientShift 6s infinite alternate;
+    background: radial-gradient(circle, #89f7fe, #66a6ff);
+    
 }
 
 .energetic-bg {
-    background: linear-gradient(45deg, #f12711, #f5af19);
-    animation: gradientShift 6s infinite alternate;
+    background: radial-gradient(circle, #f12711, #f5af19);
+    
 }
+
+/* 🎈 Floating Bubbles (Happy) */
+.bubbles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -10px;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: bubble-rise 5s infinite ease-in-out;
+}
+
+@keyframes bubble-rise {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+}
+
+/* 🌧️ Falling Rain (Sad) */
+.rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.drop {
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    animation: rain-fall 2s infinite linear;
+}
+
+@keyframes rain-fall {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* 🌊 CHILL - Multi-layer smooth flowing waves */
+.waves-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.wave {
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: wave-flow 5s infinite ease-in-out alternate;
+}
+
+.wave:nth-child(1) {
+    bottom: 15px;
+    animation-duration: 14s;
+}
+.wave:nth-child(2) {
+    bottom: 5px;
+    opacity: 0.4;
+    animation-duration: 10s;
+}
+.wave:nth-child(3) {
+    bottom: 0px;
+    opacity: 0.3;
+    animation-duration: 8s;
+}
+
+/* Wave Flowing Animation */
+@keyframes wave-flow {
+    0% { transform: translateX(0) translateY(10px) scale(1); }
+    50% { transform: translateX(-40%) translateY(-5px) scale(1.05); }
+    100% { transform: translateX(0) translateY(10px) scale(1); }
+}
+
+/* 🔥 Multiple Small Flash Effects */
+.flash {
+    position: fixed;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    animation: scattered-flash 1.5s infinite alternate ease-in-out;
+    pointer-events: none;
+    z-index: -1;
+    border-radius: 50%;
+}
+
+/* Random Positions for Flash Effects */
+.flash:nth-child(1) { top: 5%; left: 10%; animation-delay: 0s; }
+.flash:nth-child(2) { top: 20%; left: 40%; animation-delay: 0.3s; }
+.flash:nth-child(3) { top: 40%; left: 70%; animation-delay: 0.6s; }
+.flash:nth-child(4) { top: 60%; left: 30%; animation-delay: 0.9s; }
+.flash:nth-child(5) { top: 80%; left: 80%; animation-delay: 1.2s; }
+.flash:nth-child(6) { top: 10%; left: 90%; animation-delay: 1.5s; }
+.flash:nth-child(7) { top: 50%; left: 20%; animation-delay: 1.8s; }
+
+/* Flash Animation */
+@keyframes scattered-flash {
+    0% { opacity: 0; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.5); }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+/* 🔥 Pulsating Background Effect */
+.pulse-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.pulse-ring {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    animation: pulse-ripple 1.5s infinite ease-out;
+}
+
+.pulse-ring:nth-child(2) { animation-delay: 0.5s; }
+.pulse-ring:nth-child(3) { animation-delay: 1s; }
+
+/* Ripple Pulse Effect */
+@keyframes pulse-ripple {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+
+
 /* Title Animations */
 h1 {
     font-size: 2.8em;
