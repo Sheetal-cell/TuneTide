@@ -10,7 +10,12 @@ body {
     
     background: linear-gradient(to right, #63ffe5, #22f4ff);
     background-size: 200% 200%;
-    
+    background-image: url('path-to-your-background-image.jpg'); /* Path to your background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
     
 }
 
@@ -31,21 +36,24 @@ body {
 }
 
 .happy-bg {
-    background: radial-gradient(circle, #ff9a9e, #fad0c4);
+    background: url('assets/images/happy.webp') center/cover no-repeat;
+    animation: pulse 3.5s infinite ease-in-out;
 }
 
 .sad-bg {
-    background: radial-gradient(circle, #667db6, #0082c8);
+    background: url('assets/images/sad.webp') center/cover no-repeat;
 }
 
 .chill-bg {
-    background: radial-gradient(circle, #89f7fe, #66a6ff);
+    background: url('assets/images/chill.webp') center/cover no-repeat;
     
 }
 
 .energetic-bg {
-    background: radial-gradient(circle, #f12711, #f5af19);
-    
+    background: url('assets/images/energetic.jpg') center/cover no-repeat;
+    h1,h2{
+        color: black;
+    }
 }
 
 /* 🎈 Floating Bubbles (Happy) */
@@ -56,6 +64,7 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
+    
 }
 
 .bubble {
@@ -63,14 +72,15 @@ body {
     bottom: -10px;
     width: 20px;
     height: 20px;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(244, 127, 160, 0.603);
     border-radius: 50%;
     animation: bubble-rise 5s infinite ease-in-out;
+    
 }
 
 @keyframes bubble-rise {
     0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    100% { transform: translateY(-100vh) scale(1.5); opacity: 1; }
 }
 
 /* 🌧️ Falling Rain (Sad) */
@@ -235,6 +245,7 @@ button {
     color: white;
     cursor: pointer;
     box-shadow: 0px 4px 15px rgba(255, 126, 179, 0.5);
+    animation: pulse 1.5s infinite ease-in-out;
 }
 
 button:hover {
@@ -404,19 +415,19 @@ audio {
     
 }
 .festive-bg {
-    background: radial-gradient(circle, #ffcc00, #ff6600);
+    background: url('assets/images/festive.jpg') center/cover no-repeat;
     animation: confetti 25s infinite ease-in-out alternate-reverse;
 }
 
 .romantic-bg {
-    background: radial-gradient(circle, #ff758c, #ff7eb3);
+    background: url('assets/images/romantic.jpg') center/cover no-repeat;
     animation: hearts 10s infinite ease-in-out;
     position: relative;
     overflow:auto;
 }
 
 .longdrive-bg {
-    background: radial-gradient(circle, #1e3c72, #2a5298);
+    background: url('assets/images/longdrive.jpg') center/cover no-repeat;
     animation: movingRoad 5s infinite linear;
    
 }
@@ -433,12 +444,12 @@ audio {
 }
 
 .devotional-bg {
-    background: radial-gradient(circle, #fffb00, #ff4907);
+    background: url('assets/images/devotional.jpg') center/cover no-repeat;
     animation: divineGlow 15s infinite alternate;
 }
 
 .patriotic-bg {
-    background: linear-gradient(120deg, #ff8b16, #ffffff, #0a7b00);
+    background: url('assets/images/patriotic.jpg') center/cover no-repeat;
     animation: wavingFlag 8s infinite linear;
     color: #002aff;
     h1,h2{
@@ -447,52 +458,52 @@ audio {
 }
 
 .study-bg {
-    background: radial-gradient(circle, #008080, #20B2AA);
+    background: url('assets/images/study.jpg') center/cover no-repeat;
     animation: calmFocus 6s infinite alternate;
 }
 
 .celebration-bg {
-    background: radial-gradient(circle, #ff0080, #ffbf00);
+    background: url('assets/images/celebration.jpg') center/cover no-repeat;
     animation: fireworks 8s infinite;
 }
 
 .hope-bg {
-    background: radial-gradient(circle, #7ed56f, #28b485);
+    background: url('assets/images/hope.jpg') center/cover no-repeat;
     animation: sunriseGlow 6s infinite alternate;
 }
 
 .motivation-bg {
-    background: radial-gradient(circle, #ff4b1f, #ff9068);
+    background: url('assets/images/motivation.jpg') center/cover no-repeat;
     animation: boldPulse 2s infinite;
 }
 
 .classical-bg {
-    background: radial-gradient(circle, #daa520, #fff5b1);
+    background: url('assets/images/classical.jpg') center/cover no-repeat;
     animation: smoothWaves 8s infinite;
 }
 
 .hiphop-bg {
-    background: radial-gradient(circle, #ff1e56, #ffac41);
+    background: url('assets/images/hiphop.jpg') center/cover no-repeat;
     animation: beatDrop 1s infinite;
 }
 
 .bollywooddance-bg {
-    background: radial-gradient(circle, #ff4e50, #fc913a);
+    background: url('assets/images/bollywooddance.jpg') center/cover no-repeat;
     animation: danceLights 4s infinite;
 }
 
 .party-bg {
-    background: radial-gradient(circle, #8000ff, #ff0080);
+    background: url('assets/images/party.jpg') center/cover no-repeat;
     animation: neonStrobe 0.5s infinite;
 }
 
 .winning-bg {
-    background: radial-gradient(circle, #79fad3, #00c38f);
+    background: url('assets/images/winning.jpg') center/cover no-repeat;
     animation: trophyShine 3s infinite;
 }
 
 .ghazals-bg {
-    background: radial-gradient(circle, #5e4c5a, #847996);
+    background: url('assets/images/ghazals.jpg') center/cover no-repeat;
     animation: smoothFlow 10s infinite;
     h1,h2{
         color: black;
@@ -500,26 +511,26 @@ audio {
 }
 
 .retro-bg {
-    background: radial-gradient(circle, #ff6a00, #ff4500);
+    background: url('assets/images/retro.jpg') center/cover no-repeat;
     animation: retroVibes 6s infinite;
 }
 
 .travel-bg {
-    background: radial-gradient(circle, #3976a8, #0072ff);
+    background: url('assets/images/travel.jpg') center/cover no-repeat;
     animation: floatingClouds 4s infinite reverse;
 }
 
 .nineties-bg {
-    background: radial-gradient(circle, #ff8c00, #e65100);
+    background: url('assets/images/nineties.jpg') center/cover no-repeat;
     animation: vintageBlink 3s infinite alternate;
 }
 .wedding-bg {
-    background: radial-gradient(circle, #ffcccb, #ffb6c1);
+    background: url('assets/images/wedding.jpg') center/cover no-repeat;
     animation: heartGlow 6s infinite ease-in-out;
 }
 
 .friendship-bg {
-    background: radial-gradient(circle, #32cd32, #7fff00);
+    background: url('assets/images/friendship.jpg') center/cover no-repeat;
     animation: sparkles 6s infinite ease-in-out;
 }
 
@@ -675,7 +686,7 @@ audio {
 
 /* Self Love Mood */
 .self-love-bg {
-    background: radial-gradient(circle, #ff7eb3, #ff65a3); /* Soft pink tones */
+    background: url('assets/images/self-love.webp') center/cover no-repeat;
     animation: glowingHeart 6s infinite alternate ease-in-out;
 }
 
@@ -689,7 +700,7 @@ audio {
     }
 }
 .relaxation-bg {
-    background: radial-gradient(circle, #d6a2e8, #6e7dff);
+    background: url('assets/images/relaxation.webp') center/cover no-repeat;
     animation: smoothRelaxation 8s infinite ease-in-out;
 }
 
@@ -715,6 +726,7 @@ audio {
     width: 100%;
     max-width: 300px;
     margin: auto;
+    z-index: 2;
 }
 
 #searchMood {

@@ -40,7 +40,7 @@ function playMusic() {
 
     const song = songList.value;
     if (song) {
-        audioSource.src = `assets/${song}`;
+        audioSource.src = `assets/music/${song}`;
         audioPlayer.load();
         audioPlayer.play();
 
