@@ -207,7 +207,7 @@ h1 {
     font-size: 2.8em;
     margin-bottom: 0;
     animation: float 3s infinite ease-in-out;
-    color: #6e676a;
+    color: #444444;
    
 }
 h2 {
@@ -216,7 +216,7 @@ h2 {
     margin-bottom: 10px;
     margin-top: 0;
     animation: float 3s infinite ease-in-out;
-    color: #7b7a7b;
+    color: #313131;
 }
 p {
     font-size: 1.2em;
@@ -440,12 +440,19 @@ audio {
 }
 
 .devotional-bg {
-    background: url('assets/images/devotional.jpg') center/cover no-repeat;
-    animation: divineGlow 15s infinite alternate;
+    background: url('assets/images/devotional.jpg')  center/cover no-repeat;
+    animation: ease-in-out, divineGlow 5s infinite alternate, shimmeringAura 6s infinite alternate, divineRays 8s infinite linear;
+    color: wheat;
+    h1,h2{
+        color: wheat;
+    }
+    opacity: 0.5;
+    position: relative;
 }
 
 .patriotic-bg {
-    background: url('assets/images/patriotic.png') center/cover no-repeat;
+    background: url('assets/images/patriotic.png') center/cover no-repeat ;
+   
     animation: wavingFlag 8s infinite linear;
     color: #000b43;
     h1,h2{
@@ -455,7 +462,8 @@ audio {
 
 .study-bg {
     background: url('assets/images/study.jpg') center/cover no-repeat;
-    animation: calmFocus 6s infinite alternate;
+    animation: softGlow 8s infinite alternate, focusFlow 9s infinite alternate;
+    position: relative;
 }
 
 .celebration-bg {
@@ -576,19 +584,73 @@ audio {
 
 
 @keyframes divineGlow {
-    0% { box-shadow: 0px 0px 20px rgb(254, 113, 25); }
-    100% { box-shadow: 0px 0px 50px gold; }
+    0% {
+        box-shadow: 0px 0px 20px rgb(255, 95, 2);
+        filter: brightness(1);
+    }
+    25% {
+        box-shadow: 0px 0px 40px rgb(255, 251, 14);
+        filter: brightness(1.2);
+    }
+    50% {
+        box-shadow: 0px 0px 60px rgba(255, 230, 0, 1);
+        filter: brightness(1.5);
+    }
+    75% {
+        box-shadow: 0px 0px 40px rgba(255, 221, 0, 0.806);
+        filter: brightness(1.2);
+    }
+    100% {
+        box-shadow: 0px 0px 20px rgb(255, 119, 0);
+        filter: brightness(1);
+    }
 }
+
+/* Shimmering golden aura */
+@keyframes shimmeringAura {
+    0% {
+        background-color: rgb(251, 255, 0);
+    }
+    50% {
+        background-color: rgb(255, 111, 0);
+    }
+    100% {
+        background-color: rgba(255, 221, 0, 0.975);
+    }
+}
+
+/* Pulsating divine rays */
+@keyframes divineRays {
+    0% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+}
+
 
 @keyframes wavingFlag {
     0% { background-position: left; }
     100% { background-position: right; }
 }
 
-@keyframes calmFocus {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-    100% { transform: scale(1); }
+@keyframes softGlow {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.2); }
+}
+
+/* 2️⃣ Subtle Moving Light (Like Breathing Focus) */
+@keyframes focusFlow {
+    0% { background-position: center; }
+    50% { background-position: 10% 10%; }
+    100% { background-position: center; }
 }
 
 @keyframes fireworks {
