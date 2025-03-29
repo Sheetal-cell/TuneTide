@@ -26,14 +26,9 @@ body {
     left: 20px;
     width: 600px;
     height: auto;
-    animation: logoBounce 2s infinite alternate ease-in-out;
+    
 }
 
-/* Logo Animation */
-@keyframes logoBounce {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-5px); }
-}
 
 .happy-bg {
     background: url('assets/images/happy.webp') center/cover no-repeat;
@@ -72,7 +67,7 @@ body {
     bottom: -10px;
     width: 20px;
     height: 20px;
-    background: rgba(244, 127, 160, 0.603);
+    background: rgba(128, 0, 0, 0.356);
     border-radius: 50%;
     animation: bubble-rise 5s infinite ease-in-out;
     
@@ -238,6 +233,7 @@ select, button {
     border: none;
     transition: transform 0.2s ease-in-out;
     display: block;
+    background: radial-gradient(rgba(152, 252, 252, 0.801),rgb(159, 227, 230),rgb(141, 255, 247));
 }
 
 button {
@@ -428,7 +424,7 @@ audio {
 
 .longdrive-bg {
     background: url('assets/images/longdrive.jpg') center/cover no-repeat;
-    animation: movingRoad 5s infinite linear;
+    animation: movingRoad 20s infinite reverse;
    
 }
 @keyframes movingRoad {
@@ -526,7 +522,7 @@ audio {
 }
 .wedding-bg {
     background: url('assets/images/wedding.jpg') center/cover no-repeat;
-    animation: heartGlow 6s infinite ease-in-out;
+    animation: sparkles 6s infinite ease-in-out;
 }
 
 .friendship-bg {
@@ -686,7 +682,7 @@ audio {
 
 /* Self Love Mood */
 .self-love-bg {
-    background: url('assets/images/self-love.webp') center/cover no-repeat;
+    background: url('assets/images/self-love.png') center/cover no-repeat;
     animation: glowingHeart 6s infinite alternate ease-in-out;
 }
 
@@ -726,7 +722,9 @@ audio {
     width: 100%;
     max-width: 300px;
     margin: auto;
+    
     z-index: 2;
+   
 }
 
 #searchMood {
@@ -735,6 +733,8 @@ audio {
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background: radial-gradient(rgba(152, 252, 252, 0.801),rgb(159, 227, 230),rgb(141, 255, 247));
+    color: black;
 }
 
 #mood {
@@ -745,7 +745,7 @@ audio {
     border-radius: 5px;
     font-size: 16px;
     padding: 5px;
-    background-color: #fff;
+    background: radial-gradient(rgba(152, 252, 252, 0.801),rgb(159, 227, 230),rgb(141, 255, 247));
 }
 
 /* For small screens */
