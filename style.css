@@ -233,7 +233,7 @@ select, button {
     border: none;
     transition: transform 0.2s ease-in-out;
     display: block;
-    background: radial-gradient(rgba(152, 252, 252, 0.801),rgb(159, 227, 230),rgb(141, 255, 247));
+    background-color: whitesmoke;
 }
 
 button {
@@ -445,11 +445,11 @@ audio {
 }
 
 .patriotic-bg {
-    background: url('assets/images/patriotic.jpg') center/cover no-repeat;
+    background: url('assets/images/patriotic.png') center/cover no-repeat;
     animation: wavingFlag 8s infinite linear;
-    color: #002aff;
+    color: #000b43;
     h1,h2{
-        color: #002aff;
+        color: #000d4f;
     }
 }
 
@@ -733,8 +733,9 @@ audio {
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background: radial-gradient(rgba(152, 252, 252, 0.801),rgb(159, 227, 230),rgb(141, 255, 247));
+    background-color: white;
     color: black;
+    opacity: 0.8;
 }
 
 #mood {
@@ -745,7 +746,8 @@ audio {
     border-radius: 5px;
     font-size: 16px;
     padding: 5px;
-    background: radial-gradient(rgba(152, 252, 252, 0.801),rgb(159, 227, 230),rgb(141, 255, 247));
+    background-color:white;
+    opacity: 0.8;
 }
 
 /* For small screens */
