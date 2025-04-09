@@ -50,20 +50,27 @@ function loadSongs(mood) {
 
 // Play selected song
 function playMusic() {
-  const selectedSong = songsDropdown.value;
-
-  if (!selectedSong) {
-    alert("Please select a song!");
-    return;
+    const selectedSong = songsDropdown.value;
+  
+    if (!selectedSong) {
+      alert("Please select a song!");
+      return;
+    }
+  
+    audioSource.src = `assets/music/${selectedSong}`;
+    audioPlayer.load();
+    audioPlayer.play();
+  
+    audioPlayer.style.display = "block";  // <-- This makes the timeline appear
+    showPlayer();
+    audioPlayer.onended = playNextSong;
   }
-
-  audioSource.src = `assets/music/${selectedSong}`;
-  audioPlayer.load();
-  audioPlayer.play();
-  showPlayer();
-
-  audioPlayer.onended = playNextSong;
-}
+  function showPlayer() {
+    playerContainer.style.display = "block";
+    playerContainer.classList.add("playing");
+    audioPlayer.style.display = "block"; // <- make sure this is here
+  }
+    
 
 // Auto-play next song
 function playNextSong() {

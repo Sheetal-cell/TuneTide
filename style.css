@@ -73,6 +73,7 @@ body {
 
 .sad-bg {
     background: url('assets/images/sad.webp') center/cover no-repeat;
+    color: aliceblue;
 }
 
 .chill-bg {
@@ -308,7 +309,24 @@ button:hover {
 audio {
     width: 60%;
     border-radius: 10px;
+    display: block;
+    margin-top: 20px;
+    display: block;
+    margin: 20px auto;
+      
 }
+.player {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  audio {
+    width: 100%;
+    max-width: 600px;
+    outline: none;
+  }
+  
 
 /* Playing Animation */
 .playing {
