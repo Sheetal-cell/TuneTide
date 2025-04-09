@@ -1,182 +1,188 @@
-let playlistData = {}; // Store playlist data
+let playlistData = {};
 
-// Fetch and store playlist data when the page loads
+// Load playlist.json data
 fetch("playlist.json")
-    .then(response => response.json())
-    .then(data => {
-        playlistData = data;
-        console.log("Playlist Loaded:", playlistData);
-    })
-    .catch(error => console.error("Error loading playlist:", error));
+  .then(response => response.json())
+  .then(data => {
+    playlistData = data;
+    console.log("Playlist Loaded:", playlistData);
+  })
+  .catch(error => console.error("Error loading playlist:", error));
 
-// Function to load songs based on selected mood
-function loadSongs() {
-    const mood = document.getElementById("mood").value;
-    const songsDropdown = document.getElementById("songs");
-
-    // Clear previous song options
-    songsDropdown.innerHTML = '<option value="">-- Select Song --</option>';
-
-    if (mood && playlistData[mood]) {
-        playlistData[mood].forEach(song => {
-            let option = document.createElement("option");
-            option.value = song;
-            option.textContent = song.replace(".mp3", ""); // Display song name without extension
-            songsDropdown.appendChild(option);
-        });
-
-        // Change background gradient based on mood
-        updateBackground(mood);
-    }
-}
-
+// DOM references
+const songsDropdown = document.getElementById("songs");
 const audioPlayer = document.getElementById("audioPlayer");
+const audioSource = document.getElementById("audioSource");
 const playerContainer = document.querySelector(".player");
+const moodSelection = document.getElementById("moodSelection");
+const playlistSection = document.getElementById("playlistSection");
+const moodTitle = document.getElementById("moodTitle");
 
-// Function to play the selected song
+function setMood(mood) {
+    updateBackground(mood);           // Apply background & animation
+    loadSongs(mood);                  // Load only that mood's songs
+  
+    // Show mood name in heading
+    moodTitle.textContent = `Playlist for ${mood.charAt(0).toUpperCase() + mood.slice(1)}`;
+  
+    // 👇 Hide mood cards and search input
+    moodSelection.style.display = "none";
+    document.getElementById("moodSearch").style.display = "none";
+  
+    // 👇 Show playlist section only
+    playlistSection.style.display = "block";
+  }
+  
+
+// Load songs into dropdown
+function loadSongs(mood) {
+  songsDropdown.innerHTML = '<option value="">-- Select Song --</option>';
+
+  if (playlistData[mood]) {
+    playlistData[mood].forEach(song => {
+      const option = document.createElement("option");
+      option.value = song;
+      option.textContent = song.replace(".mp3", "");
+      songsDropdown.appendChild(option);
+    });
+  }
+}
+
+// Play selected song
 function playMusic() {
-    const songList = document.getElementById("songs");
-    const audioSource = document.getElementById("audioSource");
+  const selectedSong = songsDropdown.value;
 
-    const song = songList.value;
-    if (song) {
-        audioSource.src = `assets/music/${song}`;
-        audioPlayer.load();
-        audioPlayer.play();
+  if (!selectedSong) {
+    alert("Please select a song!");
+    return;
+  }
 
-        // Ensure the player is always visible when a song is playing
-        showPlayer();
+  audioSource.src = `assets/music/${selectedSong}`;
+  audioPlayer.load();
+  audioPlayer.play();
+  showPlayer();
 
-        // Autoplay the next song when the current one ends
-        audioPlayer.onended = playNextSong;
-    } else {
-        alert("Please select a song!");
-    }
+  audioPlayer.onended = playNextSong;
 }
 
-// Function to autoplay next song while keeping the player visible
+// Auto-play next song
 function playNextSong() {
-    const songList = document.getElementById("songs");
-    const audioSource = document.getElementById("audioSource");
+  let currentIndex = songsDropdown.selectedIndex;
 
-    let currentIndex = songList.selectedIndex;
+  if (currentIndex < songsDropdown.options.length - 1) {
+    songsDropdown.selectedIndex = currentIndex + 1;
+  } else {
+    songsDropdown.selectedIndex = 1;
+  }
 
-    if (currentIndex < songList.options.length - 1) {
-        songList.selectedIndex = currentIndex + 1;
-    } else {
-        songList.selectedIndex = 1; // Loop back to first song (after placeholder)
-    }
-
-    const nextSong = songList.value;
-    if (nextSong) {
-        audioSource.src = `assets/${nextSong}`;
-        audioPlayer.load();
-        audioPlayer.play();
-
-        // Ensure the player remains visible when a new song plays
-        showPlayer();
-    }
+  const nextSong = songsDropdown.value;
+  audioSource.src = `assets/music/${nextSong}`;
+  audioPlayer.load();
+  audioPlayer.play();
+  showPlayer();
 }
 
-// Function to update background and animations dynamically
-function updateBackground(mood) {
-    document.body.className = ""; // Reset classes
-    document.body.classList.add(`${mood}-bg`); // Apply mood-based background
-
-    // Remove old effects
-    document.querySelectorAll(".bubbles, .rain, .waves-container, .pulse-container, .flash,.pulse-ring").forEach(el => el.remove());
-    
-
-    // Add corresponding animation overlay
-    if (mood === "happy") createBubbles();
-    if (mood === "sad") createRain();  // No shake in sad!
-    if (mood === "chill") createWaves();
-    if (mood === "energetic") createScatteredFlash();
-}
-
-// 🌊 Create flowing waves for Chill mood
-function createWaves() {
-    let container = document.createElement("div");
-    container.classList.add("waves-container");
-
-    for (let i = 0; i < 3; i++) {
-        let wave = document.createElement("div");
-        wave.classList.add("wave");
-        container.appendChild(wave);
-    }
-
-    document.body.appendChild(container);
-}
-
-
-function createScatteredFlash() {
-    for (let i = 0; i < 7; i++) {  // Increased to 7 flashes
-        let flash = document.createElement("div");
-        flash.classList.add("flash");
-        document.body.appendChild(flash);
-    }
-
-    // Add pulse effect
-    let container = document.createElement("div");
-    container.classList.add("pulse-container");
-
-    for (let i = 0; i < 3; i++) {
-        let ring = document.createElement("div");
-        ring.classList.add("pulse-ring");
-        container.appendChild(ring);
-    }
-
-    document.body.appendChild(container);
-}
-
-// ☔ Create smooth rain effect for Sad mood (No shake)
-function createRain() {
-    let container = document.createElement("div");
-    container.classList.add("rain");
-    for (let i = 0; i < 30; i++) {
-        let drop = document.createElement("div");
-        drop.classList.add("drop");
-        drop.style.left = `${Math.random() * 100}%`;
-        drop.style.animationDuration = `${Math.random() * 2 + 1}s`;
-        drop.style.animationDelay = `${Math.random()}s`;
-        container.appendChild(drop);
-    }
-    document.body.appendChild(container);
-}
-
-// 🌟 Existing Happy (Bubbles) Animation
-function createBubbles() {
-    let container = document.createElement("div");
-    container.classList.add("bubbles");
-    for (let i = 0; i < 15; i++) {
-        let bubble = document.createElement("div");
-        bubble.classList.add("bubble");
-        bubble.style.left = `${Math.random() * 100}%`;
-        bubble.style.animationDelay = `${Math.random() * 5}s`;
-        container.appendChild(bubble);
-    }
-    document.body.appendChild(container);
-}
-
-// Event listener for Mood selection
-document.getElementById("mood").addEventListener("change", function() {
-    updateBackground(this.value);
-});
-
-
-// Function to make sure the player is always visible
+// Show player
 function showPlayer() {
-    playerContainer.style.display = "block";
-    playerContainer.classList.add("playing");
+  audioPlayer.style.display = "block";
+  playerContainer.classList.add("playing");
 }
-document.getElementById("searchMood").addEventListener("input", function() {
-    let filter = this.value.toLowerCase();
-    let options = document.getElementById("mood").options;
 
-    for (let option of options) {
-        let text = option.text.toLowerCase();
-        option.style.display = text.includes(filter) ? "" : "none";
-    }
+function goBack() {
+    playlistSection.style.display = "none";
+    moodSelection.style.display = "block";
+    document.getElementById("moodSearch").style.display = "block";
+  
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0;
+  
+    document.body.className = "";
+    document.querySelectorAll(".bubbles, .rain, .waves-container, .pulse-container, .flash, .pulse-ring").forEach(el => el.remove());
+  }
+  
+
+// Mood background effects
+function updateBackground(mood) {
+  document.body.className = "";
+  document.body.classList.add(`${mood}-bg`);
+  document.querySelectorAll(".bubbles, .rain, .waves-container, .pulse-container, .flash, .pulse-ring").forEach(el => el.remove());
+
+  if (mood === "happy") createBubbles();
+  if (mood === "sad") createRain();
+  if (mood === "chill") createWaves();
+  if (mood === "energetic") createScatteredFlash();
+}
+
+// Happy mood bubbles
+function createBubbles() {
+  const container = document.createElement("div");
+  container.classList.add("bubbles");
+  for (let i = 0; i < 15; i++) {
+    const bubble = document.createElement("div");
+    bubble.classList.add("bubble");
+    bubble.style.left = `${Math.random() * 100}%`;
+    bubble.style.animationDelay = `${Math.random() * 5}s`;
+    container.appendChild(bubble);
+  }
+  document.body.appendChild(container);
+}
+
+// Sad mood rain
+function createRain() {
+  const container = document.createElement("div");
+  container.classList.add("rain");
+  for (let i = 0; i < 30; i++) {
+    const drop = document.createElement("div");
+    drop.classList.add("drop");
+    drop.style.left = `${Math.random() * 100}%`;
+    drop.style.animationDuration = `${Math.random() * 2 + 1}s`;
+    drop.style.animationDelay = `${Math.random()}s`;
+    container.appendChild(drop);
+  }
+  document.body.appendChild(container);
+}
+
+// Chill mood waves
+function createWaves() {
+  const container = document.createElement("div");
+  container.classList.add("waves-container");
+  for (let i = 0; i < 3; i++) {
+    const wave = document.createElement("div");
+    wave.classList.add("wave");
+    container.appendChild(wave);
+  }
+  document.body.appendChild(container);
+}
+
+// Energetic mood flash
+function createScatteredFlash() {
+  for (let i = 0; i < 7; i++) {
+    const flash = document.createElement("div");
+    flash.classList.add("flash");
+    document.body.appendChild(flash);
+  }
+
+  const container = document.createElement("div");
+  container.classList.add("pulse-container");
+
+  for (let i = 0; i < 3; i++) {
+    const ring = document.createElement("div");
+    ring.classList.add("pulse-ring");
+    container.appendChild(ring);
+  }
+
+  document.body.appendChild(container);
+}
+
+// Mood search filter
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("moodSearch");
+  searchInput.addEventListener("input", function () {
+    const filter = searchInput.value.toLowerCase();
+    const moodCards = document.querySelectorAll(".mood-card");
+    moodCards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(filter) ? "block" : "none";
+    });
+  });
 });
-
-

@@ -14,54 +14,59 @@
     <h2>Feel it,Flow with it</h2>
 
     <label for="mood">Choose Your Mood:</label>
-    <div class="dropdown-container">
-        <input type="text" id="searchMood" placeholder="Search Mood 🎵">
-        <select id="mood" size="5" onchange="loadSongs()">
-            <option value="happy">😊 Happy</option>
-            <option value="sad">😢 Sad</option>
-            <option value="chill">🌿 Chill</option>
-            <option value="self-love">💖 Self Love </option>
-            <option value="relaxation">🧘 Relaxation </option>
-            <option value="friendship">🤝 Friendship</option>
-            <option value="energetic">⚡ Energetic</option>
-            <option value="festive">🎉 Festive</option>
-            <option value="love">💖 Love</option>
-            <option value="wedding">💍 Wedding</option>
-            <option value="longdrive">🚗 Long Drive</option>
-            <option value="devotional">🙏 Devotional</option>
-            <option value="patriotic">🫡 Patriotic</option>
-            <option value="study">📖 Study</option>
-            <option value="celebration">🎊 Celebration</option>
-            <option value="hope">🌅 Hope</option>
-            <option value="motivation">🔥 Motivation</option>
-            <option value="classical">🎻 Classical</option>
-            <option value="hiphop">🎤 Hip-Hop</option>
-            <option value="bollywooddance">💃 Bollywood Dance</option>
-            <option value="party">🥳 Party</option>
-            <option value="winning">🏆 Winning</option>
-            <option value="ghazals">🎼 Ghazals</option>
-            <option value="retro">📻 Retro</option>
-            <option value="travel">✈️ Travel</option>
-            <option value="nineties">📼 90s</option>
-        </select>
+    <div class="search-container">
+        <input type="text" id="moodSearch" placeholder="Search moods...">
     </div>
-    
-   
+      
+    <div id="moodSelection" class="mood-sections">
 
-    <label for="songs">Select a Song:</label>
-    <select id="songs"></select>
+        <div class="mood-card" onclick="setMood('happy')">😊 Happy</div>
+        <div class="mood-card" onclick="setMood('sad')">😢 Sad</div>
+        <div class="mood-card" onclick="setMood('chill')">🌿 Chill</div>
+        <div class="mood-card" onclick="setMood('self-love')">💖 Self Love</div>
+        <div class="mood-card" onclick="setMood('relaxation')">🧘 Relaxation</div>
+        <div class="mood-card" onclick="setMood('friendship')">🤝 Friendship</div>
+        <div class="mood-card" onclick="setMood('energetic')">⚡ Energetic</div>
+        <div class="mood-card" onclick="setMood('festive')">🎉 Festive</div>
+        <div class="mood-card" onclick="setMood('love')">💖 Love</div>
+        <div class="mood-card" onclick="setMood('wedding')">💍 Wedding</div>
+        <div class="mood-card" onclick="setMood('longdrive')">🚗 Long Drive</div>
+        <div class="mood-card" onclick="setMood('devotional')">🙏 Devotional</div>
+        <div class="mood-card" onclick="setMood('patriotic')">🫡 Patriotic</div>
+        <div class="mood-card" onclick="setMood('study')">📖 Study</div>
+        <div class="mood-card" onclick="setMood('celebration')">🎊 Celebration</div>
+        <div class="mood-card" onclick="setMood('hope')">🌅 Hope</div>
+        <div class="mood-card" onclick="setMood('motivation')">🔥 Motivation</div>
+        <div class="mood-card" onclick="setMood('classical')">🎻 Classical</div>
+        <div class="mood-card" onclick="setMood('hiphop')">🎤 Hip-Hop</div>
+        <div class="mood-card" onclick="setMood('bollywooddance')">💃 Bollywood Dance</div>
+        <div class="mood-card" onclick="setMood('party')">🥳 Party</div>
+        <div class="mood-card" onclick="setMood('winning')">🏆 Winning</div>
+        <div class="mood-card" onclick="setMood('ghazals')">🎼 Ghazals</div>
+        <div class="mood-card" onclick="setMood('retro')">📻 Retro</div>
+        <div class="mood-card" onclick="setMood('travel')">✈️ Travel</div>
+        <div class="mood-card" onclick="setMood('nineties')">📼 90s</div>
+      </div>
 
-    <button onclick="playMusic()">Play Music</button>
+      <!-- 🎶 Playlist Section -->
+  <div id="playlistSection" style="display: none;">
+    <h2 id="moodTitle">Playlist</h2>
+
+    <select id="songs">
+      <option value="">-- Select Song --</option>
+    </select>
+
+    <button onclick="playMusic()">▶ Play Music</button>
+    <button onclick="goBack()">🔙 Back</button>
 
     <div class="player">
-        <audio id="audioPlayer" controls>
-            <source id="audioSource" src="" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
-        
-
+      <audio id="audioPlayer" controls style="display: none;">
+        <source id="audioSource" src="" type="audio/mpeg"/>
+        Your browser does not support the audio element.
+      </audio>
     </div>
-    
+  </div>
+      
 
     <script src="script.js"></script>
 </body>

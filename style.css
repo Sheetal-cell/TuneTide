@@ -12,12 +12,48 @@ body {
     background-size: 200% 200%;
     background-image: url('path-to-your-background-image.jpg'); /* Path to your background image */
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
+    background-attachment: fixed;
     
 }
+.search-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #moodSearch {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    width: 80%;
+    max-width: 400px;
+    font-size: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+
+  #playlistContainer {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin-top: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+  }
+  
+  #playlistTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .song-list li {
+    padding: 6px;
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+  }
+  
 
 /* Logo Styling */
 .logo {
@@ -822,3 +858,53 @@ audio {
         font-size: 14px;
     }
 }
+.mood-sections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px;
+  }
+  
+  .mood-card {
+    flex: 1 1 calc(20% - 24px); /* 5 cards per row on large screens */
+    min-width: 120px;
+    max-width: 160px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .mood-card:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Responsive Breakpoints */
+  @media (max-width: 1024px) {
+    .mood-card {
+      flex: 1 1 calc(25% - 24px); /* 4 cards per row */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .mood-card {
+      flex: 1 1 calc(33.33% - 24px); /* 3 cards per row */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .mood-card {
+      flex: 1 1 calc(50% - 24px); /* 2 cards per row */
+      font-size: 0.9rem;
+    }
+  }
+  
