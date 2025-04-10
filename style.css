@@ -362,12 +362,14 @@ audio {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    left:50%
   }
   
   audio {
     width: 100%;
     max-width: 600px;
     outline: none;
+   
   }
   
 
@@ -375,6 +377,7 @@ audio {
 .playing {
     animation: pulse 1.5s infinite ease-in-out;
     justify-content: center;
+    left:37%;
 }
 
 /* Animations */
