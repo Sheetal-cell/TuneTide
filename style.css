@@ -39,6 +39,8 @@ body {
     list-style: none;
     z-index: 999;
     color: black;
+    font-weight: bold;
+    font-style: italic;
   }
   
   #dropdownList li {

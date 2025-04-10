@@ -34,38 +34,38 @@ function setMood(mood) {
   }
   
 
-  const toggle = document.getElementById("dropdownToggle");
-  const list = document.getElementById("dropdownList");
-  
-  toggle.addEventListener("click", () => {
-    list.classList.toggle("dropdown-hidden");
-  });
-  
-  function loadSongs(mood) {
-    toggle.textContent = "-- Select Song --";
-    list.innerHTML = "";
-  
-    if (playlistData[mood]) {
-      playlistData[mood].forEach(song => {
-        const li = document.createElement("li");
-        li.textContent = song.replace(".mp3", "");
-        li.addEventListener("click", () => {
-          toggle.textContent = li.textContent;
-          list.classList.add("dropdown-hidden");
-          playSelectedSong(song);
-        });
-        list.appendChild(li);
+const toggle = document.getElementById("dropdownToggle");
+const list = document.getElementById("dropdownList");
+
+toggle.addEventListener("click", () => {
+  list.classList.toggle("dropdown-hidden");
+});
+
+function loadSongs(mood) {
+  toggle.textContent = "-- Select Song --";
+  list.innerHTML = "";
+
+  if (playlistData[mood]) {
+    playlistData[mood].forEach(song => {
+      const li = document.createElement("li");
+      li.textContent = song.replace(".mp3", "");
+      li.addEventListener("click", () => {
+        toggle.textContent = li.textContent;
+        list.classList.add("dropdown-hidden");
+        playSelectedSong(song);
       });
-    }
+      list.appendChild(li);
+    });
   }
-  
-  function playSelectedSong(song) {
-    audioSource.src = `assets/music/${song}`;
-    audioPlayer.load();
-    audioPlayer.play();
-    showPlayer();
-  }
-  
+}
+
+function playSelectedSong(song) {
+  audioSource.src = `assets/music/${song}`;
+  audioPlayer.load();
+  audioPlayer.play();
+  showPlayer();
+}
+
 // Play selected song
 function playMusic() {
     const selectedSong = songsDropdown.value;
@@ -86,11 +86,8 @@ function playMusic() {
   function showPlayer() {
     playerContainer.style.display = "block";
     playerContainer.classList.add("playing");
-  
-    // Make sure audioPlayer is visible
-    audioPlayer.style.display = "block";
+    audioPlayer.style.display = "block"; // <- make sure this is here
   }
-  
     
 
 // Auto-play next song
