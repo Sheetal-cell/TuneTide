@@ -101,8 +101,8 @@ body {
 /* Logo Styling */
 .logo {
     position: absolute;
-    top: 40px;
-    left: 20px;
+    top:50px;
+    left: 40px;
     width: 600px;
     height: auto;
     
@@ -343,7 +343,7 @@ button:hover {
     max-width: 400px;
     transition: opacity 0.5s ease-in-out;
     position: relative;
-    left: 50%;
+    left: 37%;
     transform: translateX(-50%);
 }
 
@@ -374,6 +374,7 @@ audio {
 /* Playing Animation */
 .playing {
     animation: pulse 1.5s infinite ease-in-out;
+    justify-content: center;
 }
 
 /* Animations */
