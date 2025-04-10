@@ -470,7 +470,7 @@ audio {
 }
 
 .love-bg {
-    background: url('assets/images/love.jpg') center/cover no-repeat;
+    background: url('assets/images/love.png') center/cover no-repeat;
     animation: hearts 10s infinite ease-in-out;
     position: relative;
     overflow:auto;

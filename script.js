@@ -96,24 +96,32 @@ function showPlayer() {
 }
 
 function goBack() {
-  // Reset view
+  // Show mood selection and search bar
   playlistSection.style.display = "none";
   moodSelection.style.display = "block";
-
-  // Reapply flex display if needed (optional safeguard)
+  moodSearch.style.display = "block";
   document.querySelector(".mood-sections").style.display = "flex";
+  document.querySelector(".search-container").style.display = "block";
+  document.querySelector("label[for='mood']").style.display = "block";
 
   // Stop music if playing
   audioPlayer.pause();
   audioPlayer.currentTime = 0;
 
-  // Reset background
+  // Hide audio player
+  playerContainer.style.display = "none";
+
+  // Reset background and remove mood-based effects
   document.body.className = "";
   document.querySelectorAll(".bubbles, .rain, .waves-container, .pulse-container, .flash, .pulse-ring").forEach(el => el.remove());
 
-  // Hide audio player
-  playerContainer.style.display = "none";
+  // Clear search input and show all mood cards again
+  document.getElementById("moodSearch").value = "";
+  document.querySelectorAll(".mood-card").forEach(card => {
+  card.style.display = "block";
+  });
 }
+
 
   
 
