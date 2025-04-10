@@ -1,4 +1,7 @@
 let playlistData = {};
+let currentMood = "";
+let currentSongIndex = 0;
+let currentPlaylist = [];
 
 // Load playlist.json data
 fetch("playlist.json")
@@ -10,53 +13,51 @@ fetch("playlist.json")
   .catch(error => console.error("Error loading playlist:", error));
 
 // DOM references
-const songsDropdown = document.getElementById("songs");
 const audioPlayer = document.getElementById("audioPlayer");
 const audioSource = document.getElementById("audioSource");
 const playerContainer = document.querySelector(".player");
 const moodSelection = document.getElementById("moodSelection");
 const playlistSection = document.getElementById("playlistSection");
 const moodTitle = document.getElementById("moodTitle");
-
-function setMood(mood) {
-    updateBackground(mood);           // Apply background & animation
-    loadSongs(mood);                  // Load only that mood's songs
-  
-    // Show mood name in heading
-    moodTitle.textContent = `Playlist for ${mood.charAt(0).toUpperCase() + mood.slice(1)}`;
-  
-    // 👇 Hide mood cards and search input
-    moodSelection.style.display = "none";
-    document.getElementById("moodSearch").style.display = "none";
-  
-    // 👇 Show playlist section only
-    playlistSection.style.display = "block";
-  }
-  
+const moodSearch = document.getElementById("moodSearch");
 
 const toggle = document.getElementById("dropdownToggle");
 const list = document.getElementById("dropdownList");
 
-toggle.addEventListener("click", () => {
-  list.classList.toggle("dropdown-hidden");
-});
+// Mood selection
+function setMood(mood) {
+  currentMood = mood;
+  updateBackground(mood);
+  loadSongs(mood);
+  moodTitle.textContent = `Playlist for ${capitalize(mood)}`;
 
+  moodSelection.style.display = "none";
+  moodSearch.style.display = "none";
+  document.querySelector(".search-container").style.display = "none";
+  document.querySelector("label[for='mood']").style.display = "none";
+
+  playlistSection.style.display = "block";
+}
+
+// Load songs for mood
 function loadSongs(mood) {
+  currentPlaylist = playlistData[mood] || [];
+  currentSongIndex = 0;
+
   toggle.textContent = "-- Select Song --";
   list.innerHTML = "";
 
-  if (playlistData[mood]) {
-    playlistData[mood].forEach(song => {
-      const li = document.createElement("li");
-      li.textContent = song.replace(".mp3", "");
-      li.addEventListener("click", () => {
-        toggle.textContent = li.textContent;
-        list.classList.add("dropdown-hidden");
-        playSelectedSong(song);
-      });
-      list.appendChild(li);
+  currentPlaylist.forEach((song, index) => {
+    const li = document.createElement("li");
+    li.textContent = song.replace(".mp3", "");
+    li.addEventListener("click", () => {
+      toggle.textContent = li.textContent;
+      list.classList.add("dropdown-hidden");
+      currentSongIndex = index;
+      playSelectedSong(song);
     });
-  }
+    list.appendChild(li);
+  });
 }
 
 function playSelectedSong(song) {
@@ -66,90 +67,84 @@ function playSelectedSong(song) {
   showPlayer();
 }
 
-// Play selected song
-function playMusic() {
-    const selectedSong = songsDropdown.value;
-  
-    if (!selectedSong) {
-      alert("Please select a song!");
-      return;
-    }
-  
-    audioSource.src = `assets/music/${selectedSong}`;
-    audioPlayer.load();
-    audioPlayer.play();
-  
-    audioPlayer.style.display = "block";  // <-- This makes the timeline appear
-    showPlayer();
-    audioPlayer.onended = playNextSong;
-  }
-  function showPlayer() {
-    playerContainer.style.display = "block";
-    playerContainer.classList.add("playing");
-    audioPlayer.style.display = "block"; // <- make sure this is here
-  }
-    
-
-// Auto-play next song
-function playNextSong() {
-  let currentIndex = songsDropdown.selectedIndex;
-
-  if (currentIndex < songsDropdown.options.length - 1) {
-    songsDropdown.selectedIndex = currentIndex + 1;
-  } else {
-    songsDropdown.selectedIndex = 1;
+// Play next from same playlist
+function playNextFromPlaylist() {
+  currentSongIndex++;
+  if (currentSongIndex >= currentPlaylist.length) {
+    currentSongIndex = 0;
   }
 
-  const nextSong = songsDropdown.value;
-  audioSource.src = `assets/music/${nextSong}`;
-  audioPlayer.load();
-  audioPlayer.play();
-  showPlayer();
+  const nextSong = currentPlaylist[currentSongIndex];
+  if (nextSong) {
+    toggle.textContent = nextSong.replace(".mp3", "");
+    playSelectedSong(nextSong);
+  }
 }
 
 // Show player
 function showPlayer() {
   audioPlayer.style.display = "block";
+  playerContainer.style.display = "block";
   playerContainer.classList.add("playing");
 }
 
+// Back to mood screen
 function goBack() {
-  // Show mood selection and search bar
   playlistSection.style.display = "none";
   moodSelection.style.display = "block";
-  moodSearch.style.display = "flex";
   document.querySelector(".mood-sections").style.display = "flex";
   document.querySelector(".search-container").style.display = "block";
+  moodSearch.style.display = "block";
   document.querySelector("label[for='mood']").style.display = "block";
-  
-  
 
-  // Stop music if playing
+  // Reset player
   audioPlayer.pause();
   audioPlayer.currentTime = 0;
 
-  // Hide audio player
-  playerContainer.style.display = "none";
+  // Keep audio timeline
+  audioPlayer.style.display = "block";
+  playerContainer.style.display = "block";
 
-  // Reset background and remove mood-based effects
+  // Reset background
   document.body.className = "";
-  document.querySelectorAll(".bubbles, .rain, .waves-container, .pulse-container, .flash, .pulse-ring").forEach(el => el.remove());
+  document.querySelectorAll(".bubbles, .rain, .waves-container, .pulse-container, .flash, .pulse-ring")
+    .forEach(el => el.remove());
 
-  // Clear search input and show all mood cards again
-  document.getElementById("moodSearch").value = "";
+  // Reset mood cards
+  moodSearch.value = "";
   document.querySelectorAll(".mood-card").forEach(card => {
-  card.style.display = "block";
+    card.style.display = "block";
   });
 }
 
+// Autoplay next
+audioPlayer.onended = () => {
+  console.log("Song ended, moving to next...");
+  playNextFromPlaylist();
+};
 
-  
+// Mood search filter
+document.addEventListener("DOMContentLoaded", () => {
+  moodSearch.addEventListener("input", () => {
+    const filter = moodSearch.value.toLowerCase();
+    document.querySelectorAll(".mood-card").forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(filter) ? "block" : "none";
+    });
+  });
+});
 
-// Mood background effects
+// Dropdown toggle
+toggle.addEventListener("click", () => {
+  list.classList.toggle("dropdown-hidden");
+});
+
+// Background effects
 function updateBackground(mood) {
   document.body.className = "";
   document.body.classList.add(`${mood}-bg`);
-  document.querySelectorAll(".bubbles, .rain, .waves-container, .pulse-container, .flash, .pulse-ring").forEach(el => el.remove());
+  document.querySelectorAll(".bubbles, .rain, .waves-container, .pulse-container, .flash, .pulse-ring")
+    .forEach(el => el.remove());
 
   if (mood === "happy") createBubbles();
   if (mood === "sad") createRain();
@@ -157,7 +152,6 @@ function updateBackground(mood) {
   if (mood === "energetic") createScatteredFlash();
 }
 
-// Happy mood bubbles
 function createBubbles() {
   const container = document.createElement("div");
   container.classList.add("bubbles");
@@ -171,7 +165,6 @@ function createBubbles() {
   document.body.appendChild(container);
 }
 
-// Sad mood rain
 function createRain() {
   const container = document.createElement("div");
   container.classList.add("rain");
@@ -186,7 +179,6 @@ function createRain() {
   document.body.appendChild(container);
 }
 
-// Chill mood waves
 function createWaves() {
   const container = document.createElement("div");
   container.classList.add("waves-container");
@@ -198,7 +190,6 @@ function createWaves() {
   document.body.appendChild(container);
 }
 
-// Energetic mood flash
 function createScatteredFlash() {
   for (let i = 0; i < 7; i++) {
     const flash = document.createElement("div");
@@ -208,25 +199,15 @@ function createScatteredFlash() {
 
   const container = document.createElement("div");
   container.classList.add("pulse-container");
-
   for (let i = 0; i < 3; i++) {
     const ring = document.createElement("div");
     ring.classList.add("pulse-ring");
     container.appendChild(ring);
   }
-
   document.body.appendChild(container);
 }
 
-// Mood search filter
-document.addEventListener("DOMContentLoaded", function () {
-  const searchInput = document.getElementById("moodSearch");
-  searchInput.addEventListener("input", function () {
-    const filter = searchInput.value.toLowerCase();
-    const moodCards = document.querySelectorAll(".mood-card");
-    moodCards.forEach(card => {
-      const text = card.textContent.toLowerCase();
-      card.style.display = text.includes(filter) ? "block" : "none";
-    });
-  });
-});
+// Helper
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
