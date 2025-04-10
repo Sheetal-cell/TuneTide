@@ -96,16 +96,25 @@ function showPlayer() {
 }
 
 function goBack() {
-    playlistSection.style.display = "none";
-    moodSelection.style.display = "block";
-    document.getElementById("moodSearch").style.display = "block";
-  
-    audioPlayer.pause();
-    audioPlayer.currentTime = 0;
-  
-    document.body.className = "";
-    document.querySelectorAll(".bubbles, .rain, .waves-container, .pulse-container, .flash, .pulse-ring").forEach(el => el.remove());
-  }
+  // Reset view
+  playlistSection.style.display = "none";
+  moodSelection.style.display = "block";
+
+  // Reapply flex display if needed (optional safeguard)
+  document.querySelector(".mood-sections").style.display = "flex";
+
+  // Stop music if playing
+  audioPlayer.pause();
+  audioPlayer.currentTime = 0;
+
+  // Reset background
+  document.body.className = "";
+  document.querySelectorAll(".bubbles, .rain, .waves-container, .pulse-container, .flash, .pulse-ring").forEach(el => el.remove());
+
+  // Hide audio player
+  playerContainer.style.display = "none";
+}
+
   
 
 // Mood background effects
