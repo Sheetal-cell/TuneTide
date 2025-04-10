@@ -93,7 +93,7 @@ function goBack() {
   playlistSection.style.display = "none";
   moodSelection.style.display = "block";
   document.querySelector(".mood-sections").style.display = "flex";
-  document.querySelector(".search-container").style.display = "block";
+  document.querySelector(".search-container").style.display = "flex";
   moodSearch.style.display = "block";
   document.querySelector("label[for='mood']").style.display = "block";
 

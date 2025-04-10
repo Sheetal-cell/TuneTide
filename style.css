@@ -889,6 +889,12 @@ audio {
     z-index: 2;
    
 }
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    left:50%;
+  }
 
 #searchMood {
     width: 100%;
@@ -899,6 +905,7 @@ audio {
     background-color: white;
     color: black;
     opacity: 0.8;
+    justify-content: center;
 }
 
 #mood {
