@@ -34,20 +34,38 @@ function setMood(mood) {
   }
   
 
-// Load songs into dropdown
-function loadSongs(mood) {
-  songsDropdown.innerHTML = '<option value="">-- Select Song --</option>';
-
-  if (playlistData[mood]) {
-    playlistData[mood].forEach(song => {
-      const option = document.createElement("option");
-      option.value = song;
-      option.textContent = song.replace(".mp3", "");
-      songsDropdown.appendChild(option);
-    });
+  const toggle = document.getElementById("dropdownToggle");
+  const list = document.getElementById("dropdownList");
+  
+  toggle.addEventListener("click", () => {
+    list.classList.toggle("dropdown-hidden");
+  });
+  
+  function loadSongs(mood) {
+    toggle.textContent = "-- Select Song --";
+    list.innerHTML = "";
+  
+    if (playlistData[mood]) {
+      playlistData[mood].forEach(song => {
+        const li = document.createElement("li");
+        li.textContent = song.replace(".mp3", "");
+        li.addEventListener("click", () => {
+          toggle.textContent = li.textContent;
+          list.classList.add("dropdown-hidden");
+          playSelectedSong(song);
+        });
+        list.appendChild(li);
+      });
+    }
   }
-}
-
+  
+  function playSelectedSong(song) {
+    audioSource.src = `assets/music/${song}`;
+    audioPlayer.load();
+    audioPlayer.play();
+    showPlayer();
+  }
+  
 // Play selected song
 function playMusic() {
     const selectedSong = songsDropdown.value;
@@ -68,8 +86,11 @@ function playMusic() {
   function showPlayer() {
     playerContainer.style.display = "block";
     playerContainer.classList.add("playing");
-    audioPlayer.style.display = "block"; // <- make sure this is here
+  
+    // Make sure audioPlayer is visible
+    audioPlayer.style.display = "block";
   }
+  
     
 
 // Auto-play next song
@@ -99,10 +120,12 @@ function goBack() {
   // Show mood selection and search bar
   playlistSection.style.display = "none";
   moodSelection.style.display = "block";
-  moodSearch.style.display = "block";
+  moodSearch.style.display = "flex";
   document.querySelector(".mood-sections").style.display = "flex";
   document.querySelector(".search-container").style.display = "block";
   document.querySelector("label[for='mood']").style.display = "block";
+  
+  
 
   // Stop music if playing
   audioPlayer.pause();

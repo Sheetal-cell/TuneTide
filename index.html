@@ -52,9 +52,11 @@
   <div id="playlistSection" style="display: none;">
     <h2 id="moodTitle">Playlist</h2>
 
-    <select id="songs">
-      <option value="">-- Select Song --</option>
-    </select>
+    <div class="custom-dropdown">
+      <button id="dropdownToggle">-- Select Song --</button>
+      <ul id="dropdownList" class="dropdown-hidden"></ul>
+    </div>
+    
 
     <button onclick="playMusic()">▶ Play Music</button>
     <button onclick="goBack()">🔙 Back</button>
